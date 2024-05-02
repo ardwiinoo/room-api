@@ -3,12 +3,7 @@ import { DataTypes, Model } from "sequelize";
 
 const db = Database.getSQLInstance()
 
-class User extends Model {
-    id!: number;
-    name!: string;
-    email!: string;
-    password!: string;
-}
+export class User extends Model {}
 
 User.init({
     id: {
