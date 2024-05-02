@@ -3,19 +3,17 @@ import { DataTypes, Model } from "sequelize";
 
 const db = Database.getSQLInstance()
 
-export class User extends Model {}
+export class Room extends Model {}
 
-User.init({
+Room.init({
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
     },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    name: DataTypes.STRING
 }, {
     sequelize: db,
-    modelName: 'User',
-    tableName: 'users'
+    modelName: 'Room',
+    tableName: 'rooms'
 })
