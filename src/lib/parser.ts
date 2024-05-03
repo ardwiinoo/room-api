@@ -13,7 +13,6 @@ export function parseFlags(argv: string[]): Record<string, string> {
     return flags
 }
 
-
 export interface Parser {
     toString(defaults?: string): string
     toStringArray(defaults?: string[]): string[]
