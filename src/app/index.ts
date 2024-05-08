@@ -1,8 +1,8 @@
 import { IncomingMessage, Server, ServerResponse } from "http"
 import express, { Express } from "express"
-import { ExpressService, services } from "@/app/module"
-import { env } from "@/lib/env"
-import { Connection, Database } from "@/db"
+import { ExpressService, services } from "../app/module"
+import { env } from "../lib/env"
+import { Connection, Database } from "../db"
 import logger from "morgan"
 import cors from "cors"
 
