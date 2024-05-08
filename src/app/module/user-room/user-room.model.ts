@@ -1,7 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { Room } from "../room/room.model";
 import { User } from "../account/account.model";
-import { Database } from "@/db";
+import { Database } from "../../../db";
 
 const db = Database.getSQLInstance()
 
