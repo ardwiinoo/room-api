@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "lint": "eslint 'src/**/*.{js,ts}'",
+    "start": "node ./dist/index.js",
+    "dev": "nodemon ./src/index.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -20,8 +20,7 @@
     "mongoose": "^8.3.3",
     "morgan": "^1.10.0",
     "mysql2": "^3.9.7",
-    "sequelize": "^6.37.3",
-    "ts-node": "^10.9.2"
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -29,13 +28,9 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.12.7",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
-    "eslint": "^9.1.1",
-    "globals": "^15.1.0",
     "nodemon": "^3.1.0",
-    "prisma": "^5.13.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0"
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.4.5"
   }
 }

@@ -1,6 +1,6 @@
 import { Express, Request, Response, NextFunction } from 'express';
 import { User } from '../module/account/account.model';
-import { env } from '@/lib/env';
+import { env } from '../../lib/env';
 import jwt from 'jsonwebtoken'
 import { AccountStore } from '../module/account/account.store';
 
