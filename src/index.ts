@@ -1,7 +1,7 @@
 import { parseFlags } from "./lib/parser"
 import dotenv from "dotenv"
 import express from "express"
-import { env } from '@/lib/env';
+import { env } from './lib/env';
 import { RoomApi } from "./app";
 
 const flags = parseFlags(process.argv)
