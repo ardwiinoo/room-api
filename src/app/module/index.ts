@@ -1,4 +1,4 @@
-import { Service } from "@/app";
+import { Service } from "../index";
 import { Express } from "express";
 import { AccountService } from "./account/account.api";
 
