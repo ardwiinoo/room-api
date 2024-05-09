@@ -5,6 +5,9 @@ import { env } from "../lib/env"
 import { Connection, Database } from "../db"
 import logger from "morgan"
 import cors from "cors"
+import { User } from "./module/account/account.model"
+import { Room } from "./module/room/room.model"
+import { UserRoom } from "./module/user-room/user-room.model"
 
 export interface Service {
     createRoutes(): void
@@ -108,8 +111,16 @@ export class RoomApi implements App {
         }
     }
 
+    async initializeModels() {
+        const db = Database.getSQLInstance();
+        User.initialize(db)
+        Room.initialize(db)
+        UserRoom.initialize(db)
+    }
+
     async start(): Promise<void> {
         if (this.option.useDb) await this.db.open()
+        this.initializeModels()
         this.installPlugin()
 
         for (const service of this.option.services!) {
