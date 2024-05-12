@@ -19,7 +19,7 @@ export class Database implements Connection {
         host: env.get('DB_HOST').toString(),
         port: env.get('DB_PORT').toNumber()
     }
-    private static mdbUri = env.get('MONGO_URI').toString()
+    private mdbUri = env.get('MONGO_URI').toString()
     
     public static getSQLInstance(): Sequelize {
         return Database.sqlInstance
@@ -30,24 +30,26 @@ export class Database implements Connection {
     }
 
     async open(): Promise<void> {
-        if (Database.sqlInstance) return
+        if (!Database.sqlInstance) {
+            Database.sqlInstance = new Sequelize(this.sqlConfig.database, this.sqlConfig.username, this.sqlConfig.password, {
+                host: this.sqlConfig.host,
+                dialect: 'mysql',
+                port: this.sqlConfig.port
+            })
 
-        Database.sqlInstance = new Sequelize(this.sqlConfig.database, this.sqlConfig.username, this.sqlConfig.password, {
-            host: this.sqlConfig.host,
-            dialect: 'mysql',
-            port: this.sqlConfig.port
-        })
+            await Database.sqlInstance.authenticate()
+            console.log("Sequelize Connected...")
+        }
 
-        await Database.sqlInstance.authenticate()
-
-        // if (Database.mdbInstance) return
-
-        // await mongoose.connect(Database.mdbUri)
-        // Database.mdbInstance = mongoose
+        if (!Database.mdbInstance) {
+            await mongoose.connect(this.mdbUri)
+            Database.mdbInstance = mongoose
+            console.log("Mongoose Connected...")
+        }
     }
 
     async close(): Promise<void> {
-        // if (Database.mdbInstance) await Database.mdbInstance.disconnect()
         if (Database.sqlInstance) await Database.sqlInstance.close()
+        if (Database.mdbInstance) await Database.mdbInstance.disconnect()
     }
 }
