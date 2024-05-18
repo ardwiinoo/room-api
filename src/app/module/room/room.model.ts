@@ -1,4 +1,6 @@
-import { Sequelize, DataTypes, Model } from "sequelize";
+import Joi from "joi"
+import { Sequelize, DataTypes, Model } from "sequelize"
+import { Validator, validateSchema } from "../../../lib/validator"
 
 export class Room extends Model {
     public id!: number
@@ -19,4 +21,22 @@ export class Room extends Model {
             tableName: 'rooms'
         });
     }
+}
+
+const createRoomSchema = Joi.object({
+    name: Joi.string().required()
+})
+
+export type CreateRoom = {
+    name: string
+}
+
+export function createRoom(data: any): Validator {
+    return {
+        validate: () => validateSchema(createRoomSchema, data)
+    }
+}
+
+export default {
+    createRoom
 }
