@@ -1,4 +1,8 @@
 
-import { auth } from './auth';
+import { auth } from './auth'
+import { typeable } from './typeable'
 
-export { auth }
+export { 
+    auth,
+    typeable
+}
