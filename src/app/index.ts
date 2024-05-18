@@ -8,6 +8,7 @@ import cors from "cors"
 import { User } from "./module/account/account.model"
 import { Room } from "./module/room/room.model"
 import { UserRoom } from "./module/user-room/user-room.model"
+import { typeable } from "./middleware"
 
 export interface Service {
     createRoutes(): void
@@ -74,6 +75,7 @@ export class RoomApi implements App {
         app.use(
             express.json(),
             express.urlencoded({ extended: true }),
+            typeable,
             logger(':method \t :url \t :status \t :response-time ms'),
             cors({ 
                 origin: env.get('CORS_ALLOWED_ORIGIN').toString('*'),

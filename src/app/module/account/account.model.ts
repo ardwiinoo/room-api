@@ -1,5 +1,6 @@
 import {Sequelize, DataTypes, Model } from "sequelize";
 import Joi from "joi";
+import passwordComplexity from "joi-password-complexity";
 import { Validator, validateSchema } from "../../../lib/validator"
 
 export class User extends Model {
@@ -27,9 +28,19 @@ export class User extends Model {
     }
 }
 
+const complexityOptions = {
+  min: 5,
+  max: 12,
+  lowerCase: 1,
+  upperCase: 1,
+  numeric: 1,
+  symbol: 1,
+  requirementCount: 2,
+}
+
 const loginSchema = Joi.object({
     email: Joi.string().email().required(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required()
+    password: passwordComplexity(complexityOptions)
 })
 
 export type Login = {
@@ -46,7 +57,7 @@ export function login(data: any): Validator {
 const registerSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).required()
+    password: passwordComplexity(complexityOptions)
 })
 
 export type Register = {
