@@ -9,6 +9,7 @@ export interface CreateChat {
 
 interface Store {
     save(c: CreateChat): Promise<Document>
+    getHistories(roomId: string): Promise<Document[]>
 }
 
 export class ChatStore implements Store {
@@ -22,5 +23,9 @@ export class ChatStore implements Store {
 
         await chat.save()
         return chat
+    }
+
+     async getHistories(roomId: string): Promise<Document[]> {
+        return Chat.find({ roomId }).exec()
     }
 }
